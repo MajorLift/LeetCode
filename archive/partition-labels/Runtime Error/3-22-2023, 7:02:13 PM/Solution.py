@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/partition-labels
+
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        n = len(s)
+        charmap = defaultdict(list)
+        for i, char in enumerate(s):
+            if len(charmap[char]) < 2:
+                charmap[char].append(i)
+            else:
+                charmap[char][1] = i
+        charmap = {k: v for k, v in charmap.items() if len(v) > 1}
+
+        output = [[]]
+        for i, char in enumerate(s):
+            if not output[-1]:
+                output[-1].append(i)
+                if char not in charmap and i < n - 1:
+                    output[-1].append(i + 1)
+                    output.append([])
+                else:
+                    output[-1].append(charmap[char][1] + 1)
+            else:
+                if i == output[-1][1] - 1 and i < n - 1:
+                    output.append([])
+                elif char in charmap:
+                    output[-1][1] = max(output[-1][1], charmap[char][1] + 1)
+        return [e[1] - e[0] for e in output]
+
+            

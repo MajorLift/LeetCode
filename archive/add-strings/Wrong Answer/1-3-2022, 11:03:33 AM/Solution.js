@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/add-strings
+
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var addStrings = function(num1, num2) {
+    let long = num1.length >= num2.length ? num1 : num2
+    let short = num1.length < num2.length ? num1 : num2
+    short = "0".repeat(long.length - short.length) + short
+    
+    let sum = ""
+    let carry = 0
+    for (let i = long.length - 1; i >= 0; i -= 1) {
+        const add = (parseInt(long[i]) + parseInt(short[i])) % 10
+        carry = Math.floor((parseInt(long[i]) + parseInt(short[i])) / 10)
+        sum = (carry + add).toString() + sum
+    }
+    if (carry > 0) sum = carry.toString() + sum
+    return sum
+};

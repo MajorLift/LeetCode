@@ -1,0 +1,29 @@
+// https://leetcode.com/problems/snapshot-array
+
+class SnapshotArray:
+
+    def __init__(self, length: int):
+        self.data = [[(0, -1)] for _ in range(length)]
+        self.snap_id = -1
+
+    def set(self, index: int, val: int) -> None:
+        prev_val, prev_snapid = self.data[index][-1]
+        if prev_snapid == self.snap_id:
+            self.data[index][-1] = (val, self.snap_id)
+        elif prev_val == val:
+            self.data[index].append((val, prev_snapid))
+
+    def snap(self) -> int:
+        self.snap_id += 1
+        return self.snap_id
+
+    def get(self, index: int, snap_id: int) -> int:
+        pos = bisect_left(self.data[index], snap_id, key=lambda x: x[1])
+        return self.data[index][pos - 1][0]
+
+
+# Your SnapshotArray object will be instantiated and called as such:
+# obj = SnapshotArray(length)
+# obj.set(index,val)
+# param_2 = obj.snap()
+# param_3 = obj.get(index,snap_id)

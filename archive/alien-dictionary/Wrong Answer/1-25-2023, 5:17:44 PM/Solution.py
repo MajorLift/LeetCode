@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/alien-dictionary
+
+class Solution:
+    def alienOrder(self, words: List[str]) -> str:
+        adj = defaultdict(set)
+        indegrees = defaultdict(int)
+        for l, r in zip(words, words[1:]):
+            for u, v in zip(l, r):
+                if u != v and v not in adj[u]:
+                    adj[u].add(v)
+                    indegrees[u] += 0
+                    indegrees[v] += 1
+                    break
+            else:
+                if len(l) != len(r):
+                    return ""
+        
+        output = []
+        queue = deque([char for char in adj.keys() if indegrees[char] == 0])
+        while queue:
+            curr = queue.popleft()
+            output.append(curr)
+            for v in adj[curr]:
+                indegrees[v] -= 1
+                if indegrees[v] == 0:
+                    queue.append(v)
+
+        return "".join(output)

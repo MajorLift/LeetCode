@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/reverse-integer
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        sgn = 0
+        if x < 0:
+            sgn = 1
+            x = -x
+        
+        arr = []
+        while True:
+            digit = x % 10
+            arr.append(digit)
+            x -= digit
+            if x == 0:
+                break
+            else:
+                x /= 10
+        
+        result = 0
+        for e in arr:
+            result *= 10
+            result += e
+            
+        if sgn == 1:
+            result *= -1
+
+        return int(result)
