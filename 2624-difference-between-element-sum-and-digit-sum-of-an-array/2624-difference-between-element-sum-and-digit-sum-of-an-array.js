@@ -4,11 +4,11 @@
  */
 var differenceOfSum = function(nums) {
     const sum = (arr) => arr.reduce((acc, curr) => acc + curr)
-    const [elemSum, digitSum] = [nums, nums.map(getDigitSum)].map(sum)
+    const [elemSum, digitSum] = [nums, nums.map(addDigits)].map(sum)
     return elemSum - digitSum
 };
 
-function getDigitSum(num) {
+function addDigits(num) {
     let sum = 0
     while (num > 0) {
         sum += num % 10
