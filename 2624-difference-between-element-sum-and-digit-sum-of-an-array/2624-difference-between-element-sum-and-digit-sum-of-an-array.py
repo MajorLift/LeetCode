@@ -7,4 +7,4 @@ class Solution:
                 curr //= 10
                 if curr:
                     nums.append(curr)
-        return abs(sum(nums) - sum(digit_iter(nums)))
+        return sum(nums) - sum(digit_iter(nums))
