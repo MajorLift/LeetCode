@@ -1,11 +1,16 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        cnt = [0] * 26
-        for char in magazine:
-            cnt[ord(char) - ord('a')] += 1
-        for char in ransomNote:
-            curr = ord(char) - ord('a')
-            cnt[curr] -= 1
-            if cnt[curr] < 0:
+        target, source = map(sorted, (ransomNote, magazine))
+        m, n = map(len, (target, source))
+        i = j = 0
+        while True:
+            if i == m and j <= n:
+                return True
+            if i < m and j == n:
                 return False
-        return True
+            while i < m and j < n and target[i] == source[j]:
+                i += 1
+                j += 1
+            while i < m and j < n and target[i] != source[j]:
+                j += 1
+            
