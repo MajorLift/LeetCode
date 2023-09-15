@@ -4,7 +4,8 @@ class Solution:
         for char in magazine:
             cnt[ord(char) - ord('a')] += 1
         for char in ransomNote:
-            cnt[ord(char) - ord('a')] -= 1
-            if cnt[ord(char) - ord('a')] < 0:
+            curr = ord(char) - ord('a')
+            cnt[curr] -= 1
+            if cnt[curr] < 0:
                 return False
         return True
