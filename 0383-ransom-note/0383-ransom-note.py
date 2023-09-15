@@ -8,8 +8,6 @@ class Solution:
                 return True
             if j == n:
                 return False
-            while i < m and j < n and target[i] == source[j]:
+            if target[i] == source[j]:
                 i += 1
-                j += 1
-            while i < m and j < n and target[i] != source[j]:
-                j += 1
+            j += 1
