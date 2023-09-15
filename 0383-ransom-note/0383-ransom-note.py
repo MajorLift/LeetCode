@@ -4,13 +4,12 @@ class Solution:
         m, n = map(len, (target, source))
         i = j = 0
         while True:
-            if i == m and j <= n:
+            if i == m:
                 return True
-            if i < m and j == n:
+            if j == n:
                 return False
             while i < m and j < n and target[i] == source[j]:
                 i += 1
                 j += 1
             while i < m and j < n and target[i] != source[j]:
                 j += 1
-            
