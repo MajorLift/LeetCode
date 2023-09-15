@@ -2,7 +2,6 @@ class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         mst = set()
         dist = [(0, 0)] + [(+inf, i) for i in range(1, len(points))]
-        heapify(dist)
         cost = 0
         while dist:
             u_key, u_idx = heappop(dist)
