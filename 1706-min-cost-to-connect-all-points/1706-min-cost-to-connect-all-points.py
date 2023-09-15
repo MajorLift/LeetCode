@@ -10,9 +10,9 @@ class Solution:
             next_dist = []
             while dist:
                 v_key, v_idx = heappop(dist)
-                if v_idx not in mst:
-                    w = Solution.manhattan(points[u_idx], points[v_idx])
-                    heappush(next_dist, (min(w, v_key), v_idx))
+                if v_idx in mst: continue
+                w = Solution.manhattan(points[u_idx], points[v_idx])
+                heappush(next_dist, (min(w, v_key), v_idx))
             dist = next_dist
         return cost
 
