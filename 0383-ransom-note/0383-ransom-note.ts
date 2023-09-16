@@ -8,5 +8,5 @@ function canConstruct(ransomNote: string, magazine: string): boolean {
     ))
     return Object
         .keys(ransom_cnt)
-        .every((key) => ransom_cnt[key] <= (magazine_cnt[key] ?? -Infinity))
+        .every((key) => ransom_cnt[key] <= (magazine_cnt[key] ?? 0))
 };
