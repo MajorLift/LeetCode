@@ -6,7 +6,7 @@ function canConstruct(ransomNote: string, magazine: string): boolean {
             return acc
         }, {})
     ))
-    return !Object
+    return Object
         .keys(ransom_cnt)
-        .some((key) => (magazine_cnt[key] ?? -Infinity) < ransom_cnt[key])
+        .every((key) => ransom_cnt[key] <= (magazine_cnt[key] ?? -Infinity))
 };
