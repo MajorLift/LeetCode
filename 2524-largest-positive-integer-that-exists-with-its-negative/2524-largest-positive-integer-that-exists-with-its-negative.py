@@ -1,6 +1,12 @@
 class Solution:
     def findMaxK(self, nums: List[int]) -> int:
-        nums_set = set(nums)
-        return max([num for num in nums_set
-                    if num > 0 and -num in nums_set] 
-                or [-1])
+        nums.sort()
+        l, r = 0, len(nums) - 1
+        while l < r and nums[l] < 0 and nums[r] > 0:
+            if abs(nums[l]) < nums[r]:
+                r -= 1
+            elif abs(nums[l]) > nums[r]:
+                l += 1
+            else:
+                return nums[r]
+        return -1
