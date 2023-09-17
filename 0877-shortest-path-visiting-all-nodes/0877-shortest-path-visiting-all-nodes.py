@@ -4,11 +4,12 @@ class Solution:
         
         cache = dict()
         def dfs(node: int, mask: int) -> int:
-            if (node, mask) in cache:
-                return cache[(node, mask)]
             if mask ^ (1 << node) == (1 << n) - 1:
                 return 0
+            if (node, mask) in cache:
+                return cache[(node, mask)]
             cache[(node, mask)] = +inf
+            
             cache[(node, mask)] = reduce(
                 lambda acc, v: min(
                     acc, 
