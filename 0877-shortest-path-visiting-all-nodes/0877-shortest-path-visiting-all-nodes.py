@@ -1,21 +1,19 @@
 class Solution:
     def shortestPathLength(self, graph: List[List[int]]) -> int:
         n = len(graph)
-        cache = [dict() for _ in range(n)]
+        queue = deque([(i, 1 << i) for i in range(n)])
+        visited = set(queue)
 
-        def dfs(node: int, mask: int) -> int:
-            if mask ^ (1 << node) == (1 << n) - 1:
-                return 0
-            if mask in cache[node]:
-                return cache[node][mask]
-            cache[node][mask] = +inf
-            cache[node][mask] = reduce(
-                lambda acc, v: min(
-                    acc, 
-                    1 + dfs(v, mask ^ (1 << node)), 
-                    1 + dfs(v, mask)), 
-                [v for v in graph[node] if not mask & (1 << v)],
-                +inf)
-            return cache[node][mask]
-
-        return min(dfs(i, 0) for i in range(n))
+        steps = 0
+        while queue:
+            next_queue = deque()
+            while queue:
+                u, mask = queue.popleft()
+                if mask == (1 << n) - 1:
+                    return steps
+                for v in graph[u]:
+                    if (v, mask | (1 << v)) not in visited:
+                        visited.add((v, mask | (1 << v)))
+                        next_queue.append((v, mask | (1 << v)))
+            queue = next_queue
+            steps += 1
