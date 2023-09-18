@@ -10,4 +10,4 @@ class Solution:
             for v in graph[u]:
                 if (v, mask | (1 << v)) not in visited:
                     visited.add((v, mask | (1 << v)))
-                    pq.append((steps + 1, v, mask | (1 << v)))
+                    heappush(pq, (steps + 1, v, mask | (1 << v)))
