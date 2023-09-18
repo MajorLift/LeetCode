@@ -1,3 +1,4 @@
 class Solution:
     def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
-        return [i for i, _ in sorted(enumerate(mat), key=lambda x: (sum(x[1]), x[0]))[:k]]
+        pq = [(sum(row), i) for i, row in enumerate(mat)]
+        return [i for cnt, i in nsmallest(k, pq)]
