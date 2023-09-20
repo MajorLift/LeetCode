@@ -4,9 +4,7 @@ class Solution:
         while nums:
             if len(nums) > 1:
                 first, last = nums.pop(0), nums.pop()
-                first *= 10 ** (math.floor(math.log10(last)) + 1)
-                first += last
-                ans += first
+                ans += first * 10 ** int(math.log10(last) + 1) + last
             else:
                 ans += nums.pop()                
         return ans
