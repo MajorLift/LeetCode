@@ -20,7 +20,6 @@ class Solution:
             else:
                 merged.append(nums2[j])
                 j += 1
-        print(merged)
-        return merged[(m + n) // 2] \
-            if (m + n) % 2 \
-            else (merged[(m + n) // 2 - 1] + merged[(m + n) // 2]) / 2
+        return ((merged[(m + n) // 2 - 1] + merged[(m + n) // 2]) / 2, 
+                merged[(m + n) // 2]
+            )[(m + n) % 2]
