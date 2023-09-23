@@ -14,16 +14,10 @@ class Solution:
                     adj[pre].append(post)
                     indegree[post] += 1
         
-        queue = deque([k for k, v in indegree.items() if v == 0])
-        dist = {word: 0 for word in words}
-        while queue:
-            u = queue.popleft()
-            for v in adj[u]:
-                dist[v] = max(dist[v], dist[u] + 1)
-                indegree[v] -= 1
-                if indegree[v] == 0:
-                    queue.append(v)
-        return max(dist.values()) + 1
+        @cache
+        def dfs(node):
+            return 1 + max([dfs(child) for child in adj[node]] or [0])
+        return max(dfs(k) for k, v in indegree.items() if v == 0)
         
     def is_predecessor(self, pre, post):
         m, n = map(len, (pre, post))
