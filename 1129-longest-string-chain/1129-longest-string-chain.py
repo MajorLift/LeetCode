@@ -7,4 +7,4 @@ class Solution:
                 return 0
             return 1 + max(dp(word[:i] + word[i + 1:]) 
                             for i in range(len(word)))
-        return max(dp(word) for word in words)
+        return max(dp(word) for word in sorted(words, key=len))
