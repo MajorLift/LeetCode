@@ -1,6 +1,5 @@
 class Solution:
     def longestStrChain(self, words) -> int:
-        words.sort(key=len)
         word_set = set(words)
         @cache
         def dp(word):
