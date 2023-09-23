@@ -4,5 +4,5 @@ class Solution:
         memo = defaultdict(int)
         for word in words:
             memo[word] = 1 + max(memo[word[:i] + word[i + 1:]]
-                                for i in range(len(word)))
+                                    for i in range(len(word)))
         return max(memo.values())
