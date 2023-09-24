@@ -4,7 +4,7 @@ class Solution:
         memo[0][0] = poured
         for i in range(query_row + 1):
             for j in range(i + 1):
-                flow = max(0, (memo[i][j] - 1.0) / 2.0)
-                memo[i + 1][j] += flow
-                memo[i + 1][j + 1] += flow
+                spill = max(0, (memo[i][j] - 1) / 2)
+                memo[i + 1][j] += spill
+                memo[i + 1][j + 1] += spill
         return min(1, memo[query_row][query_glass])
