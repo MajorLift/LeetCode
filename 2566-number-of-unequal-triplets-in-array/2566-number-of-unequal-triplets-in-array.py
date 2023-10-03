@@ -1,4 +1,4 @@
 class Solution:
     def unequalTriplets(self, nums: List[int]) -> int:
-        return sum(x != y and y != z and z != x
-            for x, y, z in combinations(nums, 3)) 
+        n, cnt = len(nums), Counter(nums)
+        return math.comb(n, 3) - sum(math.comb(v, 2) * (n - v) + math.comb(v, 3) for v in cnt.values())
