@@ -7,8 +7,7 @@ class Solution:
                 for u in X.getPreferredOver(y)
                     if (U := people[u], v := pairOf[u]))
             for x in range(n)
-                    if (X := people[x], y := pairOf[x])
-        )
+                    if (X := people[x], y := pairOf[x]))
 
 class Person:
     def __init__(self, preference):
