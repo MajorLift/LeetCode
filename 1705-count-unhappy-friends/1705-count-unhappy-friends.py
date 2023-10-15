@@ -1,8 +1,9 @@
 class Solution:
     def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        people = {i: Person(e) for i, e in enumerate(preferences)}
         unhappy = set()
         for (x, y), (u, v) in combinations(pairs, 2):
-            X, Y, U, V = (Person(preferences[e]) for e in (x, y, u, v))
+            X, Y, U, V = (people[p] for p in (x, y, u, v))
             if X.prefersThisOverThat(u, y) and U.prefersThisOverThat(x, v):
                 unhappy |= set([x, u])
             if X.prefersThisOverThat(v, y) and V.prefersThisOverThat(x, u):
@@ -19,3 +20,4 @@ class Person:
     
     def prefersThisOverThat(self, this, that):
         return self.rank[this] < self.rank[that]
+        
