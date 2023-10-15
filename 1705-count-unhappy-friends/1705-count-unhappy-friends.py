@@ -1,10 +1,11 @@
 class Solution:
     def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        people = {i: Person(e) for i, e in enumerate(preferences)}
         pairOf = {**{x: y for x, y in pairs}, **{y: x for x, y in pairs}}
         ans = 0
         return sum(
-            any(x in Person(preferences[u]).getPreferredOver(pairOf[u])
-                for u in Person(preferences[x]).getPreferredOver(pairOf[x]))
+            any(x in people[u].getPreferredOver(pairOf[u])
+                for u in people[x].getPreferredOver(pairOf[x]))
             for x in range(n))
 
 class Person:
